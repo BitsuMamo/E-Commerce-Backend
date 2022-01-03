@@ -1,14 +1,19 @@
 <?php
-if($_GET['type'] == ""){
-  die("Type Error");
+require_once("connection.php");
+$type = $_GET('type');
+
+// Checking if type is empty or space
+if($type == "" || $type == " "){
+  echo "Error Empty type";
 }
 
-$type = $_GET['type'];
+$type = trim($type);
 
-switch($type){
-  case 'update_by_id':
-    echo "updated by id";
-  break;
-  default:
-  break;
+$table = $_GET('table');
+
+// Checking if table is empty or space
+if($table == "" || $table == " "){
+  echo "Error Empty Table";
 }
+
+$table = trim($table);
