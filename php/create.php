@@ -37,7 +37,7 @@ $table = trim($table);
 
 
 switch($type){
-case "delete":
+case "create":
     $data = $_GET['data'];
 
     if($data == "" || $data == " ") {
@@ -46,16 +46,18 @@ case "delete":
     }
 
     $data = trim($data);
-
-    $query = query_generator('delete', $table, $data);
     
+    $query = query_generator('create', $table, $data);
+
+
     $result = mysqli_query($conn, $query);
+
 
     header('Content-Type: application/json; charset=utf-8');
 
     $json_data = check_response($result);
 
-    echo json_encode($json_data);
+    print_pretty(json_encode($json_data));
     
     break;
 }
