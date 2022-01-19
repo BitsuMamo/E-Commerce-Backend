@@ -149,4 +149,20 @@ function print_pretty($array){
   echo "</pre>";
 }
 
+function check_key_exists(){
+  $error = Errors::NO_ERROR;
 
+  if(!array_key_exists('table', $_GET)) { $error = Errors::NO_TABLE;
+  }
+  printError($error);
+  if(!array_key_exists('data', $_GET)) { $error = Errors::NO_DATA;
+  }
+  printError($error);
+}
+
+
+function check_null($to_be_checked, $error){
+  if($to_be_checked == "" || $to_be_checked == " ") {
+      printError($error);
+  }
+}
