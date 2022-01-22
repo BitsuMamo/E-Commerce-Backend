@@ -21,19 +21,6 @@ for ($i=0; $i < count($type); $i++) {
   }
 }
 
-// print_pretty($stored_procedures);
-
-
-
-
-$table_insert_params = [
-  'user' => 'username,password,first_name,last_name,telephone',
-];
-
-$table_id_name = [
-  'user' => 'id'
-];
-
 function query_generator($type, $table, $data){
     $data_array = explode(',', $data);
     global $stored_procedures;
@@ -131,7 +118,7 @@ function check_response($result){
     global $conn;
 
     if($result) {
-        echo "Successful Query";
+        // echo "Successful Query";
         $json_data["Response"] = "Success";
     }else{
         $json_data["Response"] = "Fail";
@@ -141,7 +128,6 @@ function check_response($result){
     echo "\n";
     return $json_data;
 }
-
 
 function print_pretty($array){
   echo "<pre>";
@@ -165,4 +151,31 @@ function check_null($to_be_checked, $error){
   if($to_be_checked == "" || $to_be_checked == " ") {
       printError($error);
   }
+}
+
+function cors() {
+    
+    // Allow from any origin
+    if (isset($_SERVER['HTTP_ORIGIN'])) {
+        // Decide if the origin in $_SERVER['HTTP_ORIGIN'] is one
+        // you want to allow, and if so:
+        header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
+        header('Access-Control-Allow-Credentials: true');
+        header('Access-Control-Max-Age: 86400');    // cache for 1 day
+    }
+    
+    // Access-Control headers are received during OPTIONS requests
+    if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+        
+        if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD']))
+            // may also be using PUT, PATCH, HEAD etc
+            header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+        
+        if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']))
+            header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
+    
+        exit(0);
+    }
+    
+    echo "You have CORS!";
 }
