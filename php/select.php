@@ -28,6 +28,7 @@ $json_data = check_response($result);
 
 
 $rows = [];
+
 if($json_data['Response'] == 'Success'){
   while($row = mysqli_fetch_assoc($result)){
     $rows[] = $row;

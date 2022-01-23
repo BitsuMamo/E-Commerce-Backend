@@ -29,11 +29,7 @@ for ($i=0; $i < count($type); $i++) {
   }
 }
 
-/* print_pretty($stored_procedures);
-
-foreach($stored_procedures as $a){
-  print_pretty($a);
-} */
+// print_pretty($stored_procedures);
 
 function query_generator($type, $table, $data){
     $data_array = explode(',', $data);
