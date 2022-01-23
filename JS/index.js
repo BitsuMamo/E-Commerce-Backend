@@ -13,11 +13,13 @@
 // });
 
 async function temp() {
-  var data = await $.get(
-    "http://localhost/WebDev/project/E-Commerce-Backend/php/select.php?table=user&data=-1"
+  var data = await $.post(
+    "http://localhost/WebDev/project/E-Commerce-Backend/php/delete.php",
+    { table: "user", data: "90" }
   );
+
   //data = JSON.parse(data);
-  console.log(data.Data);
+  console.log(data);
 }
 
 temp();

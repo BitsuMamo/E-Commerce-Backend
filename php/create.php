@@ -3,16 +3,17 @@ require_once "connection.php";
 require_once "utilites.php";
 require_once "ErrorHandler.php";
 
+// print_pretty($_REQUEST);
 check_key_exists();
 
-$table = $_GET['table'];
+$table = $_REQUEST['table'];
 
 // Checking if table is empty or space
 check_null($table, Errors::INVALID_TABLE);
 
 $table = trim($table);
 
-$data = $_GET['data'];
+$data = $_REQUEST['data'];
 
 check_null($data, Errors::EMPTY_DATA);
 

@@ -3,6 +3,14 @@
 require_once "connection.php";
 
 // Used to create all the stored stored_procedures names dymamicaly
+header('Access-Control-Allow-Origin: *');
+
+header('Access-Control-Allow-Methods: GET, POST');
+
+header("Access-Control-Allow-Headers: X-Requested-With");
+
+header('Content-Type: application/json; charset=utf-8');
+
 $type = ['create', 'update', 'delete', 'select'];
 $tables = ['user', 'product', 'review', 'shopping_session', 'user_address', 'user_payment', 'supplier_payment', 'supplier_address', 'supplier', 'payment_details', 'cart_item', 'order_items', 'order_details', 'product_category', 'product_iventory'];
 
@@ -20,6 +28,12 @@ for ($i=0; $i < count($type); $i++) {
   $stored_procedures[$type[$i]][$tables[$j]] = $name;
   }
 }
+
+/* print_pretty($stored_procedures);
+
+foreach($stored_procedures as $a){
+  print_pretty($a);
+} */
 
 function query_generator($type, $table, $data){
     $data_array = explode(',', $data);
@@ -125,7 +139,7 @@ function check_response($result){
         $json_data["Error"] = mysqli_error($conn);
     }
     mysqli_close($conn);
-    echo "\n";
+    // echo "\n";
     return $json_data;
 }
 
@@ -136,12 +150,16 @@ function print_pretty($array){
 }
 
 function check_key_exists(){
+  // print_pretty($_REQUEST)
   $error = Errors::NO_ERROR;
 
-  if(!array_key_exists('table', $_GET)) { $error = Errors::NO_TABLE;
+  if(!array_key_exists('table', $_REQUEST)) { 
+    $error = Errors::NO_TABLE;
   }
   printError($error);
-  if(!array_key_exists('data', $_GET)) { $error = Errors::NO_DATA;
+
+  if(!array_key_exists('data', $_REQUEST)) { 
+    $error = Errors::NO_DATA;
   }
   printError($error);
 }
