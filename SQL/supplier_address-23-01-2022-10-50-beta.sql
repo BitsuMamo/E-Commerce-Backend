@@ -1,0 +1,60 @@
+-- MariaDB dump 10.19  Distrib 10.5.12-MariaDB, for Linux (x86_64)
+--
+-- Host: mysql.hostinger.ro    Database: u574849695_25
+-- ------------------------------------------------------
+-- Server version	10.5.12-MariaDB-cll-lve
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `supplier_address`
+--
+
+DROP TABLE IF EXISTS `supplier_address`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `supplier_address` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `supplier_id` int(11) DEFAULT NULL,
+  `address_line1` varchar(60) DEFAULT NULL,
+  `address_line2` varchar(60) DEFAULT NULL,
+  `city` varchar(60) DEFAULT NULL,
+  `postal_code` varchar(60) DEFAULT NULL,
+  `country` varchar(60) DEFAULT NULL,
+  `telephone` varchar(60) DEFAULT NULL,
+  `mobile` varchar(60) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `supplier_id` (`supplier_id`),
+  CONSTRAINT `supplier_address_ibfk_1` FOREIGN KEY (`supplier_id`) REFERENCES `supplier` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `supplier_address`
+--
+
+LOCK TABLES `supplier_address` WRITE;
+/*!40000 ALTER TABLE `supplier_address` DISABLE KEYS */;
+INSERT INTO `supplier_address` VALUES (1,1,NULL,NULL,'Lake Clementinafurt','qfmp','493856475','08600350628','+65(5)4866774311'),(2,2,NULL,NULL,'Mannshire','jtks','65404','662-061-2805','228.828.9705'),(3,3,NULL,NULL,'Janetborough','zbar','18','104.445.1871x251','798-674-3808'),(4,4,NULL,NULL,'McLaughlinview','yxrz','87365','317-043-8445','+16(2)0321578255'),(5,5,NULL,NULL,'New Sydnee','vhpr','92792','504.692.1748','276-998-0490x3220'),(6,6,NULL,NULL,'Jacobsfort','pltg','43622','095-859-9638','417-443-8417x541'),(7,7,NULL,NULL,'Brendonborough','ffzy','85826412','07598385588','(459)852-1228'),(8,8,NULL,NULL,'Port Destini','ttim','66825','09054266629','584.405.4477'),(9,9,NULL,NULL,'Zboncakshire','bnik','105881452','716-608-8256x327','(695)993-5525x1566'),(10,10,NULL,NULL,'East Beth','szrp','38','(104)448-1357','1-874-887-0340x59710'),(11,11,NULL,NULL,'Rutheville','rakx','','756-054-2730x4567','824-820-4294'),(12,12,NULL,NULL,'Darrelville','kmez','7','743.302.3205x94388','1-034-578-9409'),(13,13,NULL,NULL,'West Ariel','aile','535282','631.751.1049','(602)388-9804x017'),(14,14,NULL,NULL,'Adolfofort','scun','61','00377008631','04179249527'),(15,15,NULL,NULL,'New Brendan','apxs','27842547','158-921-5934x08702','(653)729-8877x9073'),(16,16,NULL,NULL,'Alizaborough','dyzw','10583','1-923-613-5972x209','(405)931-1465x430'),(17,17,NULL,NULL,'North Ethanberg','ofql','','395-649-9613','04916944471'),(18,18,NULL,NULL,'Ernestinaton','xzvy','833808680','(125)653-8639x254','567-659-6432'),(19,19,NULL,NULL,'Port Susanstad','hoqc','3','442-223-2324x08462','1-938-465-7815x604'),(20,20,NULL,NULL,'Justenville','kyke','507','1-529-522-1244x313','+12(9)7876747083'),(21,21,NULL,NULL,'Balistreritown','alwe','','1-656-153-7564x169','1-950-830-9719x20082'),(22,22,NULL,NULL,'Landenfort','qacp','124524','(644)247-0293x618','09749838077'),(23,23,NULL,NULL,'South Davidmouth','ergx','9114','373-961-1224','379.749.0352'),(24,24,NULL,NULL,'Alanismouth','etpi','441127','07976026274','292-368-1406x3731'),(25,25,NULL,NULL,'Dickenston','nqwr','2418101','263-921-7528','085.802.6382'),(26,26,NULL,NULL,'McCulloughbury','lacu','','147.488.1324x7060','+24(0)5938686968'),(27,27,NULL,NULL,'Olsonborough','ezwp','','(100)030-6674','01351285529'),(28,28,NULL,NULL,'Evefort','txms','903121','1-247-370-0095x846','1-238-177-9468'),(29,29,NULL,NULL,'Rempelberg','ocut','780993504','06719203616','379.894.7812x6708'),(30,30,NULL,NULL,'Crystalside','cbbt','22420525','+58(4)7182354058','+32(4)3563509649'),(31,31,NULL,NULL,'Robinshire','jmze','3309574','293.232.1411x6853','994-853-5294'),(32,32,NULL,NULL,'Kesslerside','hgqn','2','1-331-487-2607x32976','03019545463'),(33,33,NULL,NULL,'Lake Georgetteborough','ynyx','557850135','958-212-2650','1-047-194-3526'),(34,34,NULL,NULL,'Ashashire','lkwh','97','1-381-671-3451','004.486.3054'),(35,35,NULL,NULL,'New Mckaylashire','jxdt','22830','553-857-7699','015.397.4012x25142'),(36,36,NULL,NULL,'North Christelle','kyxd','43776','652-898-0576x41719','(664)748-7365x9529'),(37,37,NULL,NULL,'West Odessachester','xdxo','846','989.647.2504x85346','1-720-462-3426'),(38,38,NULL,NULL,'New Raymundo','xugw','49','776.759.4922x95682','755-228-2919x7582'),(39,39,NULL,NULL,'Port Madilyn','zdkl','548354','689.005.9980x6918','(358)257-1876x7396'),(40,40,NULL,NULL,'Lake Merritttown','uqna','58','+04(1)0923834726','464.920.6357'),(41,41,NULL,NULL,'Port Brenda','bbma','30622','(351)185-4006x95397','1-674-470-8131x39371'),(42,42,NULL,NULL,'Bednarton','xcyw','21967','600-543-2585x00003','+29(2)5651324048'),(43,43,NULL,NULL,'East Osvaldo','hbty','','+85(1)6783608521','03201675429'),(44,44,NULL,NULL,'Kovacekview','gupj','97792','1-445-760-3122x724','651-619-4585'),(45,45,NULL,NULL,'Johnsonberg','mmxb','340757','919.363.1617x934','(291)411-9220x24336'),(46,46,NULL,NULL,'Turnerton','isds','273','899.671.1029','344-561-9705'),(47,47,NULL,NULL,'Gleichnershire','lvur','655151','634-438-2011x461','00959072669'),(48,48,NULL,NULL,'Handside','cnxf','20583306','639.298.9208x6764','367.649.7595x0679'),(49,49,NULL,NULL,'South Makenzie','jhth','2142903','1-383-009-2859','04201565103'),(50,50,NULL,NULL,'New Noah','dbmh','489331325','+55(1)6798174070','(178)036-8159'),(51,51,NULL,NULL,'West Seamusmouth','hfhd','29214213','02968156742','1-215-466-0698'),(52,52,NULL,NULL,'North Maurineport','oxqb','684373','1-795-358-7970','709-250-8531x79937'),(53,53,NULL,NULL,'South Ike','hghu','9155','(287)621-8005x056','(564)447-2108'),(54,54,NULL,NULL,'Port Janis','fpqv','6','413.910.2326','1-230-175-8261x3339'),(55,55,NULL,NULL,'South Tyreekview','zbua','4020561','716.399.7054x835','1-609-373-4924'),(56,56,NULL,NULL,'Barbaramouth','evup','818884789','502.340.8827x079','123-942-7023x63852'),(57,57,NULL,NULL,'Schadenport','ijie','1004','387.519.4583x29531','996.671.2909'),(58,58,NULL,NULL,'Port Favian','naiu','31','05033630721','1-095-798-7824x724'),(59,59,NULL,NULL,'East Roxanne','udzp','3647','1-827-671-7196x3787','(247)258-7985x0474'),(60,60,NULL,NULL,'Bayerburgh','bihp','119','057.880.7329','1-618-361-6180x56370'),(61,61,NULL,NULL,'Christiansenberg','swgo','415632915','869-610-1747','584-316-4669x351'),(62,62,NULL,NULL,'Nameton','eqbc','77','001-319-9758x94552','672.921.4855'),(63,63,NULL,NULL,'Nyasiachester','ltdf','93947688','(614)009-3024x37594','+43(8)4086020861'),(64,64,NULL,NULL,'Marianville','mfcd','57964138','102-617-6739x77734','763-064-8136x196'),(65,65,NULL,NULL,'McClureberg','xuad','54266','164-445-9064x9597','345-297-0209'),(66,66,NULL,NULL,'Greenfelderhaven','vfsc','670167697','+02(6)1970786234','+88(4)5728629237'),(67,67,NULL,NULL,'Kreigermouth','xvci','6363403','+40(3)0704089297','529-054-0893x547'),(68,68,NULL,NULL,'North Ednaland','yvli','100136025','902-255-7811x0425','648-256-6892x06864'),(69,69,NULL,NULL,'West Deannaport','idfa','2715','769-054-7981x513','(151)372-2904'),(70,70,NULL,NULL,'Port Ayana','ckhk','121','1-946-858-2751x38636','025.778.4999'),(71,71,NULL,NULL,'Tiastad','pgen','36688','(668)071-7755','1-409-324-6372x4619'),(72,72,NULL,NULL,'Port Terrellview','hauk','69335300','1-265-031-5731','858.866.7227'),(73,73,NULL,NULL,'Pearlinemouth','nudx','626332','199.554.8125x027','691.290.4818'),(74,74,NULL,NULL,'South Amir','fcfd','75506','1-118-968-3673','1-283-895-7046'),(75,75,NULL,NULL,'Wallacechester','pceq','768','904-717-2791x804','1-281-303-2985x9306'),(76,76,NULL,NULL,'New Ceciliastad','hjby','25','1-826-430-6310','410.261.4782'),(77,77,NULL,NULL,'Lake Elinorfurt','tbrc','2926','802.618.0391','780-554-3960'),(78,78,NULL,NULL,'New Alejandrinfort','xbss','48985070','132.690.9190','1-318-465-4987x32432'),(79,79,NULL,NULL,'East Chasehaven','ahaq','22517339','1-994-930-8923x0316','(397)709-7622'),(80,80,NULL,NULL,'Billchester','merf','6782451','(977)960-2806','291.348.0704x257'),(81,81,NULL,NULL,'West Garrettfurt','bzst','5','02653857137','(715)425-7503x47947'),(82,82,NULL,NULL,'Irwinfurt','vthm','202','844.092.9520','(990)220-8673x795'),(83,83,NULL,NULL,'Howehaven','pqid','338','443.240.1695x9117','1-313-273-9588'),(84,84,NULL,NULL,'Gerlachview','mzav','447','767-941-8524','1-473-398-2121x87327'),(85,85,NULL,NULL,'Lake Felicita','grna','737880','1-903-921-6950','1-872-261-9532x332'),(86,86,NULL,NULL,'Gutmannstad','nkzg','8','875-643-4142x77480','508-368-3008x509'),(87,87,NULL,NULL,'East Johannahaven','jbvm','986129603','(139)333-9676x454','799.130.3225'),(88,88,NULL,NULL,'Justinatown','xxpa','423160','1-163-085-3514','206.440.6465x90664'),(89,89,NULL,NULL,'Grimesland','wrqy','663309','1-078-031-9120x627','818.049.1571x3090'),(90,90,NULL,NULL,'New Jerelstad','agir','17','1-217-510-6903','1-156-633-5300x76359'),(91,91,NULL,NULL,'Quitzonstad','qycp','','+98(5)0286524100','287.003.3892x82456'),(92,92,NULL,NULL,'Port Jakob','rcxk','1694','(310)328-3854','09218949561'),(93,93,NULL,NULL,'West Stephany','kodx','3613','1-220-612-7812','463-703-2626x609'),(94,94,NULL,NULL,'North Ezekielside','bejd','1','(145)049-8492x6010','196.594.2126x70837'),(95,95,NULL,NULL,'Port Destiney','zloh','7386','1-880-361-7504','870-300-1900x19656'),(96,96,NULL,NULL,'Raumouth','ujed','18666461','06268772992','03748744718'),(97,97,NULL,NULL,'Murphymouth','tuey','','+37(4)2955266852','137-325-8760x30091'),(98,98,NULL,NULL,'Destinimouth','ddeh','2763966','(356)977-9119','(905)559-2010x73611'),(99,99,NULL,NULL,'Lake Keshawntown','bule','459','474-990-2556x80041','(710)877-6414x23684'),(100,100,NULL,NULL,'East Shayna','oqcm','1668993','+29(0)7517563234','551-358-5479');
+/*!40000 ALTER TABLE `supplier_address` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2022-01-23 10:50:48
