@@ -18,7 +18,7 @@ check_null($data, Errors::EMPTY_DATA);
 
 $data = trim($data);
 
-$query = query_generator('update', $table, $data);
+$query = sp_query_generator('update', $table, $data);
 
 $result = mysqli_query($conn, $query);
 

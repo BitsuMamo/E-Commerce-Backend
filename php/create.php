@@ -19,7 +19,7 @@ check_null($data, Errors::EMPTY_DATA);
 
 $data = trim($data);
 
-$query = query_generator('create', $table, $data);
+$query = sp_query_generator('create', $table, $data);
 
 $result = mysqli_query($conn, $query);
 

@@ -18,7 +18,7 @@ check_null($data, Errors::EMPTY_DATA);
 
 $data = trim($data);
 
-$query = query_generator('delete', $table, $data);
+$query = sp_query_generator('delete', $table, $data);
 
 $result = mysqli_query($conn, $query);
 

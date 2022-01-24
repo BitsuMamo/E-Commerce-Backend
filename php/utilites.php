@@ -31,7 +31,7 @@ for ($i=0; $i < count($type); $i++) {
 
 // print_pretty($stored_procedures);
 
-function query_generator($type, $table, $data){
+function sp_query_generator($type, $table, $data){
     $data_array = explode(',', $data);
     global $stored_procedures;
 
@@ -55,6 +55,31 @@ function query_generator($type, $table, $data){
     }
     return $query;
 
+}
+
+function fn_query_generator($functionName, $data){
+    $data_array = explode(',', $data);
+    // $query = "INSERT INTO $table ($table_insert_params[$table]) VALUE (";
+    $query = "SELECT ${functionName}(";
+
+    for($i = 0; $i < count($data_array); $i++){
+        if($i < count($data_array) - 1) {
+          if(is_numeric($data_array[$i])){
+            $query = $query . "$data_array[$i],";
+          }else{
+            $query = $query . "'$data_array[$i]',";
+          }
+        }else{
+          if(is_numeric($data_array[$i])){
+            $query = $query . "$data_array[$i])";
+          }else{
+            $query = $query . "'$data_array[$i]')";
+          }
+        }
+    }
+    return $query;
+
+   
 }
 
 // echo(query_generator('create', 'user', -1));
