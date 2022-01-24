@@ -23,8 +23,26 @@ $query = sp_query_generator('create', $table, $data);
 
 $result = mysqli_query($conn, $query);
 
+$json_data = check_response($result);
+
+$query = "CALL SP_select_last_insert('${table}')";
+
+$result = mysqli_query($conn, $query);
+
+mysqli_close($conn);
+
 header('Content-Type: application/json; charset=utf-8');
 
-$json_data = check_response($result);
+if($result){
+  $rows = [];
+
+  if($json_data['Response'] == 'Success'){
+    while($row = mysqli_fetch_assoc($result)){
+      $rows[] = $row;
+    }
+  }
+
+  $json_data['Data'] = $rows;
+}
 
 echo(json_encode($json_data));
