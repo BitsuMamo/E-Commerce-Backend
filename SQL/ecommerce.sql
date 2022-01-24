@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 19, 2022 at 12:26 PM
+-- Generation Time: Jan 24, 2022 at 09:30 AM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.6
 
@@ -25,132 +25,137 @@ DELIMITER $$
 --
 -- Procedures
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_create_cart_item` (IN `id` INT, IN `session_id` INT, IN `product_id` INT, IN `quantity` INT)  BEGIN
-    INSERT INTO `ecommerce`.`cart_item` (`id`,
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_create_cart_item` (IN `session_id` INT, IN `product_id` INT, IN `quantity` INT)  BEGIN
+    INSERT INTO `ecommerce`.`cart_item` (
                                       `session_id`,
                                       `product_id`,
                                       `quantity`
     )
-    VALUES (id,
+    VALUES (
             session_id,
             product_id,
             quantity
             );
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_create_order_details` (IN `id` INT, IN `user_id` INT, IN `total` DECIMAL, IN `payment_id` INT)  BEGIN
-    INSERT INTO `ecommerce`.`order_details` (`id`,
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_create_order_details` (IN `user_id` INT, IN `total` DECIMAL, IN `payment_id` INT)  BEGIN
+    INSERT INTO `ecommerce`.`order_details` (
                                       `user_id`,
                                       `total`,
                                       `payment_id`
     )
-    VALUES (id,
+    VALUES (
             user_id,
             total,
             payment_id
             );
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_create_order_items` (IN `id` INT, IN `order_id` INT, IN `product_id` INT, IN `quantity` INT)  BEGIN
-    INSERT INTO `ecommerce`.`order_items` (`id`,
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_create_order_items` (IN `order_id` INT, IN `product_id` INT, IN `quantity` INT)  BEGIN
+    INSERT INTO `ecommerce`.`order_items` (
                                       `order_id`,
                                       `product_id`,
                                       `quantity`
     )
-    VALUES (id,
+    VALUES (
             order_id,
             product_id,
             quantity
             );
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_create_payment_details` (IN `id` INT, IN `amount` DECIMAL, IN `provider` VARCHAR(60))  BEGIN
-    INSERT INTO `ecommerce`.`payment_details` (`id`,
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_create_payment_details` (IN `amount` DECIMAL, IN `provider` VARCHAR(60))  BEGIN
+    INSERT INTO `ecommerce`.`payment_details` (
                                       `amount`,
                                       `provider`
     )
-    VALUES (id,
+    VALUES (
             amount,
             provider
             );
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_create_product` (IN `id` INT, IN `name` VARCHAR(60), IN `description` TEXT, IN `category_id` INT, IN `inventory_id` INT, IN `price` DECIMAL)  BEGIN
-    INSERT INTO `ecommerce`.`product` (`id`,
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_create_product` (IN `name` VARCHAR(60), IN `description` TEXT, IN `imageUrls` TEXT, IN `category_id` INT, IN `inventory_id` INT, IN `supplier_id` INT, IN `price` DECIMAL)  BEGIN
+    INSERT INTO `ecommerce`.`product` (
                                       `name`,
                                       `description`,
+                                       `imageUrls`,
                                        `category_id`,
                                        `inventory_id`,
+                                       `supplier_id`,
                                        `price`
     )
-    VALUES (id,
+    VALUES (
             name,
             description,
+            imageUrls,
             category_id,
             inventory_id,
+            supplier_id,
             price
             );
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_create_product_catagory` (IN `id` INT, IN `name` VARCHAR(60), IN `description` TEXT)  BEGIN
-    INSERT INTO `ecommerce`.`product_catagory` (`id`,
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_create_product_catagory` (IN `name` VARCHAR(60), IN `description` TEXT)  BEGIN
+    INSERT INTO `ecommerce`.`product_catagory` (
                                       `name`,
                                       `description`
     )
-    VALUES (id,
+    VALUES (
             name,
             description
             );
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_create_product_inventory` (IN `id` INT, IN `quantity` INT)  BEGIN
-    INSERT INTO `ecommerce`.`product_inventory` (`id`,
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_create_product_inventory` (IN `quantity` INT)  BEGIN
+    INSERT INTO `ecommerce`.`product_inventory` (
                                       `quantity`
     )
-    VALUES (id,
+    VALUES (
             quantity
             );
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_create_review` (IN `id` INT, IN `product_id` INT, IN `user_id` INT, IN `description` INT, IN `rating` DECIMAL)  BEGIN
-    INSERT INTO `ecommerce`.`review` (`id`,
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_create_review` (IN `product_id` INT, IN `user_id` INT, IN `description` INT, IN `rating` DECIMAL)  BEGIN
+    INSERT INTO `ecommerce`.`review` (
                                       `product_id`,
                                       `user_id`,
                                       `description`,
                                       `rating`
     )
-    VALUES (id,
-           product_id,
+    VALUES (
+            product_id,
             user_id,
             description,
             rating
             );
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_create_shopping_session` (IN `id` INT, IN `user_id` INT, IN `total` DECIMAL)  BEGIN
-    INSERT INTO `ecommerce`.`shopping_session` (`id`,
-                                            `user_id`,
-                                                `total`
-
-    )
-    VALUES (id,
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_create_shopping_session` (IN `user_id` INT, IN `total` DECIMAL)  BEGIN
+    declare id int;
+    INSERT INTO `ecommerce`.`shopping_session` (
+                                                `user_id`,
+                                                `total`)
+    VALUES (
             user_id,
-            total
-            );
+            total);
+    set id = LAST_INSERT_ID();
+    call SP_select_shopping_session(@id);
+
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_create_supplier` (IN `id` INT, IN `name` VARCHAR(60))  BEGIN
-    INSERT INTO `ecommerce`.`supplier` (`id`,
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_create_supplier` (IN `name` VARCHAR(60))  BEGIN
+    INSERT INTO `ecommerce`.`supplier` (
                                             `name`
 
     )
-    VALUES (id,
+    VALUES (
             name
             );
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_create_supplier_address` (IN `id` INT, IN `supplier_id` INT, IN `address_line1` VARCHAR(60), IN `address_line2` VARCHAR(60), IN `city` VARCHAR(60), IN `postal_code` VARCHAR(60), IN `country` VARCHAR(60), IN `telephone` VARCHAR(60), IN `mobile` VARCHAR(60))  BEGIN
-    INSERT INTO `ecommerce`.`supplier_address` (`id`,
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_create_supplier_address` (IN `supplier_id` INT, IN `address_line1` VARCHAR(60), IN `address_line2` VARCHAR(60), IN `city` VARCHAR(60), IN `postal_code` VARCHAR(60), IN `country` VARCHAR(60), IN `telephone` VARCHAR(60), IN `mobile` VARCHAR(60))  BEGIN
+    INSERT INTO `ecommerce`.`supplier_address` (
                                             `supplier_id`,
                                             `address_line1`,
                                             `address_line2`,
@@ -160,7 +165,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_create_supplier_address` (IN `id
                                             `telephone`,
                                             `mobile`
     )
-    VALUES (id,
+    VALUES (
             supplier_id,
             address_line1,
             address_line2,
@@ -172,24 +177,23 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_create_supplier_address` (IN `id
             );
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_create_supplier_payment` (IN `id` INT, IN `supplier_id` INT, IN `payment_type` VARCHAR(60), IN `account_no` INT)  BEGIN
-    INSERT INTO `ecommerce`.`supplier_payment` (`id`,
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_create_supplier_payment` (IN `supplier_id` INT, IN `payment_type` VARCHAR(60), IN `account_no` INT)  BEGIN
+    INSERT INTO `ecommerce`.`supplier_payment` (
                                             `supplier_id`,
                                             `payment_type`,
                                             `account_no`
     )
-    VALUES (id,
+    VALUES (
             supplier_id,
             payment_type,
             account_no
             );
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_create_user` (IN `id` INT, IN `username` VARCHAR(60), IN `password` VARCHAR(255), IN `first_name` VARCHAR(60), IN `last_name` VARCHAR(60), IN `telephone` VARCHAR(20))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_create_user` (IN `username` VARCHAR(60), IN `password` VARCHAR(255), IN `first_name` VARCHAR(60), IN `last_name` VARCHAR(60), IN `telephone` VARCHAR(20))  BEGIN
 
 
     INSERT INTO `ecommerce`.`user` (
-        `id`,
         `username`,
         `password`,
         `first_name`,
@@ -198,7 +202,6 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_create_user` (IN `id` INT, IN `u
     )
     VALUES
     (
-        id,
         username,
         password,
         first_name,
@@ -208,8 +211,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_create_user` (IN `id` INT, IN `u
 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_create_user_address` (IN `id` INT, IN `user_id` INT, IN `address_line1` VARCHAR(60), IN `address_line2` VARCHAR(60), IN `city` VARCHAR(60), IN `postal_code` VARCHAR(60), IN `country` VARCHAR(60), IN `telephone` VARCHAR(60))  BEGIN
-    INSERT INTO `ecommerce`.`user_address` (`id`,
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_create_user_address` (IN `user_id` INT, IN `address_line1` VARCHAR(60), IN `address_line2` VARCHAR(60), IN `city` VARCHAR(60), IN `postal_code` VARCHAR(60), IN `country` VARCHAR(60), IN `telephone` VARCHAR(60))  BEGIN
+    INSERT INTO `ecommerce`.`user_address` (
                                             `user_id`,
                                             `address_line1`,
                                             `address_line2`,
@@ -218,7 +221,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_create_user_address` (IN `id` IN
                                             `country`,
                                             `telephone`,
                                             `mobile`)
-    VALUES (id,
+    VALUES (
             user_id,
             address_line1,
             address_line2,
@@ -230,13 +233,13 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_create_user_address` (IN `id` IN
 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_create_user_payment` (IN `id` INT, IN `user_id` INT, IN `payment_type` VARCHAR(60), IN `account_no` INT)  BEGIN
-    INSERT INTO `ecommerce`.`user_payment` (`id`,
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_create_user_payment` (IN `user_id` INT, IN `payment_type` VARCHAR(60), IN `account_no` INT)  BEGIN
+    INSERT INTO `ecommerce`.`user_payment` (
                                             `user_id`,
                                             `payment_type`,
                                             `account_no`
     )
-    VALUES (id,
+    VALUES (
             user_id,
             payment_type,
             account_no
@@ -314,6 +317,17 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_select_cart_item` (IN `id` INT) 
     else
         select * from cart_item where cart_item.id = id;
     end if;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_select_last_insert` (IN `table_name` VARCHAR(255))  BEGIN
+    declare idfs2 int;
+    set idfs2 = LAST_INSERT_ID();
+
+    set @t = concat('select * from ',table_name,' where id = ',idfs2);
+    prepare statement from @t;
+    execute statement;
+    deallocate prepare statement;
+
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_select_order_details` (IN `id` INT)  BEGIN
@@ -469,12 +483,14 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_update_payment_details` (IN `id`
 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_update_product` (IN `id` INT, IN `name` VARCHAR(60), IN `description` TEXT, IN `category_id` INT, IN `inventory_id` INT, IN `price` DECIMAL)  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_update_product` (IN `id` INT, IN `name` VARCHAR(60), IN `description` TEXT, IN `imageUrls` TEXT, IN `category_id` INT, IN `inventory_id` INT, IN `supplier_id` INT, IN `price` DECIMAL)  BEGIN
     update `product`
     set `name` = name,
         `description` = description,
+        `imageUrls`=imageUrls,
         `category_id` = category_id,
         `inventory_id` = inventory_id,
+        `supplier_id`=supplier_id,
         `price` = price,
         `modified_at` = current_timestamp()
     where product.id = id;
@@ -583,6 +599,24 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_update_user_payment` (IN `id` IN
 
 END$$
 
+--
+-- Functions
+--
+CREATE DEFINER=`root`@`localhost` FUNCTION `function_userAuth` (`username` VARCHAR(60), `password` VARCHAR(255)) RETURNS INT(11) BEGIN
+        DECLARE valid INT;
+        DECLARE passwd varchar(255);
+        set @pass = (select exists(select user.password from user where user.username = username));
+
+        set passwd = (select user.password from user where user.username = username);
+        if @pass = 1 then
+             if password = passwd then return 1;
+            end if;
+        elseif @pass = 0 then return -1;
+        end if;
+
+        return 0;
+    END$$
+
 DELIMITER ;
 
 -- --------------------------------------------------------
@@ -654,13 +688,14 @@ CREATE TABLE `product` (
   `id` int(11) NOT NULL,
   `name` varchar(60) DEFAULT NULL,
   `description` text DEFAULT NULL,
-  `category_id` int(11) DEFAULT NULL,
+  `imageUrls` text DEFAULT NULL,
   `inventory_id` int(11) DEFAULT NULL,
   `price` decimal(10,0) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `modified_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `deleted_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `supplier_id` int(11) DEFAULT NULL
+  `supplier_id` int(11) DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -719,6 +754,19 @@ CREATE TABLE `shopping_session` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `modified_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `shopping_session`
+--
+
+INSERT INTO `shopping_session` (`id`, `user_id`, `total`, `created_at`, `modified_at`) VALUES
+(1, 33, '55', '2022-01-24 08:00:50', '2022-01-24 08:00:50'),
+(2, 33, '55', '2022-01-24 08:02:34', '2022-01-24 08:02:34'),
+(3, 33, '55', '2022-01-24 08:02:45', '2022-01-24 08:02:45'),
+(4, 33, '55', '2022-01-24 08:03:43', '2022-01-24 08:03:43'),
+(5, 33, '55', '2022-01-24 08:03:51', '2022-01-24 08:03:51'),
+(6, 33, '55', '2022-01-24 08:03:52', '2022-01-24 08:03:52'),
+(7, 33, '55', '2022-01-24 08:05:07', '2022-01-24 08:05:07');
 
 -- --------------------------------------------------------
 
@@ -983,7 +1031,7 @@ ALTER TABLE `review`
 -- AUTO_INCREMENT for table `shopping_session`
 --
 ALTER TABLE `shopping_session`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `supplier`
@@ -1095,4 +1143,3 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
- 
