@@ -10,10 +10,7 @@ check_null($data, Errors::EMPTY_DATA);
 
 $data = trim($data);
 
-// $query = fn_query_generator('function_userAuth', $data);
-// $query = "CALL auth('bam', 'bam')";
-$query = "select function_userAuth('valentine.reichert','558e93a2f5cd3d020b732429c97b3a2d9757a5a5')";
-// $query = "call auth('valentine.reichert','558e93a2f5cd3d020b732429c97b3a2d9757a5a5')";
+$query = fn_query_generator('function_userAuth', $data);
 
 $result = mysqli_query($conn, $query);
 
@@ -27,6 +24,8 @@ if($json_data['Response'] == 'Success'){
     $rows[] = $row;
   }
 }
+
+mysqli_close($conn);
 
 $json_data['Data'] = $rows;
 

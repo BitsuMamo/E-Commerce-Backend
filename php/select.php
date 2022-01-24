@@ -26,6 +26,7 @@ $result = mysqli_query($conn, $query);
 
 $json_data = check_response($result);
 
+mysqli_close($conn);
 
 $rows = [];
 
