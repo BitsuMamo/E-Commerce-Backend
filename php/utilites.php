@@ -82,72 +82,6 @@ function fn_query_generator($functionName, $data){
    
 }
 
-// echo(query_generator('create', 'user', -1));
-
-/* function insert_query_generator($table, $data)
-{
-    $data_array = explode(',', $data);
-    global $table_insert_params;
-
-    $query = "INSERT INTO $table ($table_insert_params[$table]) VALUE (";
-
-    for($i = 0; $i < count($data_array); $i++){
-        if($i < count($data_array) - 1) {
-            $query = $query . "'$data_array[$i]',";
-        }else{
-            $query = $query . "'$data_array[$i]')";
-        }
-    }
-    return $query;
-} */
-
-function update_query_generator($table, $data)
-{
-    $data_array = explode(',', $data);
-    global $table_insert_params;
-    global $table_id_name;
-
-    $params_array = explode(',', $table_insert_params[$table]);
-
-    $query = "UPDATE $table SET ";
-    for($i = 0; $i < count($params_array); $i++){
-        $data_index = $i + 1;
-        if($i < count($params_array) - 1) {
-            $query = $query . "$params_array[$i] = '$data_array[$data_index]', ";
-        }else{
-            $query = $query . "$params_array[$i] = '$data_array[$data_index]'";
-        }
-    }
-    $query = $query . " WHERE $table_id_name[$table] = $data_array[0]";
-    return $query;
-}
-
-function select_query_generator($table, $id = -1)
-{
-    global $table_id_name;
-
-    if($id < 0) {
-        $query = "SELECT * FROM $table";
-    }
-
-    $query = "SELECT * FROM $table WHERE $table_id_name[$table] = $id";
-
-    return $query;
-}
-
-function delete_query_generator($table, $id = -1)
-{
-    global $table_id_name;
-
-    $query = "";
-
-    if($id >= 0) {
-        $query = "DELETE FROM $table WHERE $table_id_name[$table] = $id";
-    }
-
-    return $query;
-}
-
 function check_response($result){
     $json_data = [];
     global $conn;
@@ -159,8 +93,6 @@ function check_response($result){
         $json_data["Response"] = "Fail";
         $json_data["Error"] = mysqli_error($conn);
     }
-    mysqli_close($conn);
-    // echo "\n";
     return $json_data;
 }
 
@@ -190,31 +122,4 @@ function check_null($to_be_checked, $error){
   if($to_be_checked == "" || $to_be_checked == " ") {
       printError($error);
   }
-}
-
-function cors() {
-    
-    // Allow from any origin
-    if (isset($_SERVER['HTTP_ORIGIN'])) {
-        // Decide if the origin in $_SERVER['HTTP_ORIGIN'] is one
-        // you want to allow, and if so:
-        header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
-        header('Access-Control-Allow-Credentials: true');
-        header('Access-Control-Max-Age: 86400');    // cache for 1 day
-    }
-    
-    // Access-Control headers are received during OPTIONS requests
-    if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
-        
-        if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD']))
-            // may also be using PUT, PATCH, HEAD etc
-            header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
-        
-        if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']))
-            header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
-    
-        exit(0);
-    }
-    
-    echo "You have CORS!";
 }
