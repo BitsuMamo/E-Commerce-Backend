@@ -33,11 +33,11 @@ mysqli_close($conn);
 
 header('Content-Type: application/json; charset=utf-8');
 
-if($result){
+if ($result) {
   $rows = [];
 
-  if($json_data['Response'] == 'Success'){
-    while($row = mysqli_fetch_assoc($result)){
+  if ($json_data['Response'] == 'Success') {
+    while ($row = mysqli_fetch_assoc($result)) {
       $rows[] = $row;
     }
   }
@@ -45,4 +45,4 @@ if($result){
   $json_data['Data'] = $rows;
 }
 
-echo(json_encode($json_data));
+echo (json_encode($json_data));

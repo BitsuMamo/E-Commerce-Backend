@@ -30,8 +30,8 @@ mysqli_close($conn);
 
 $rows = [];
 
-if($json_data['Response'] == 'Success'){
-  while($row = mysqli_fetch_assoc($result)){
+if ($json_data['Response'] == 'Success') {
+  while ($row = mysqli_fetch_assoc($result)) {
     $rows[] = $row;
   }
 }
