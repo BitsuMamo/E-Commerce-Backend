@@ -22,8 +22,6 @@ $query = sp_query_generator('delete', $table, $data);
 
 $result = mysqli_query($conn, $query);
 
-header('Content-Type: application/json; charset=utf-8');
-
 $json_data = check_response($result);
 
 mysqli_close($conn);

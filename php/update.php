@@ -26,6 +26,4 @@ $json_data = check_response($result);
 
 mysqli_close($conn);
 
-header('Content-Type: application/json; charset=utf-8');
-
 echo json_encode($json_data);

@@ -10,12 +10,14 @@ check_null($data, Errors::EMPTY_DATA);
 
 $data = trim($data);
 
-$query = fn_query_generator('function_userAuth', $data);
+$query = auth_query_generator('SP_user_authorization', $data);
 
 $result = mysqli_query($conn, $query);
 
 $json_data = check_response($result);
 
+
+mysqli_close($conn);
 
 $rows = [];
 
@@ -24,8 +26,6 @@ if ($json_data['Response'] == 'Success') {
     $rows[] = $row;
   }
 }
-
-mysqli_close($conn);
 
 $json_data['Data'] = $rows;
 

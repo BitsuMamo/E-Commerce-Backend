@@ -2,17 +2,20 @@
 
 require_once "connection.php";
 
-// Used to create all the stored stored_procedures names dymamicaly
+// CORS. Preventing CORS Error
 header('Access-Control-Allow-Origin: *');
 
 header('Access-Control-Allow-Methods: GET, POST');
 
 header("Access-Control-Allow-Headers: X-Requested-With");
 
+// Make the Response JSON
 header('Content-Type: application/json; charset=utf-8');
+
 
 $type = ['create', 'update', 'delete', 'select'];
 $tables = ['user', 'product', 'review', 'shopping_session', 'user_address', 'user_payment', 'supplier_payment', 'supplier_address', 'supplier', 'payment_details', 'cart_item', 'order_items', 'order_details', 'product_category', 'product_iventory'];
+
 
 $stored_procedures = [];
 
@@ -21,7 +24,6 @@ for ($i = 0; $i < count($type); $i++) {
 }
 
 for ($i = 0; $i < count($type); $i++) {
-
   for ($j = 0; $j < count($tables); $j++) {
     $name = 'SP_' . $type[$i];
     $name = $name . '_' . $tables[$j];
@@ -29,8 +31,7 @@ for ($i = 0; $i < count($type); $i++) {
   }
 }
 
-// print_pretty($stored_procedures);
-
+//print_pretty($stored_procedures);
 function sp_query_generator($type, $table, $data)
 {
   $data_array = explode(',', $data);
@@ -57,11 +58,10 @@ function sp_query_generator($type, $table, $data)
   return $query;
 }
 
-function fn_query_generator($functionName, $data)
+function auth_query_generator($functionName, $data)
 {
   $data_array = explode(',', $data);
-  // $query = "INSERT INTO $table ($table_insert_params[$table]) VALUE (";
-  $query = "SELECT ${functionName}(";
+  $query = "CALL ${functionName}(";
 
   for ($i = 0; $i < count($data_array); $i++) {
     if ($i < count($data_array) - 1) {

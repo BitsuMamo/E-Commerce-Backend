@@ -3,8 +3,6 @@ require_once "connection.php";
 require_once "utilites.php";
 require_once "ErrorHandler.php";
 
-// print_pretty($_REQUEST);
-
 check_key_exists();
 
 $table = $_REQUEST['table'];
@@ -34,8 +32,8 @@ if ($json_data['Response'] == 'Success') {
   while ($row = mysqli_fetch_assoc($result)) {
     $rows[] = $row;
   }
-}
 
-$json_data['Data'] = $rows;
+  $json_data['Data'] = $rows;
+}
 
 echo json_encode($json_data);
